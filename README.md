@@ -27,4 +27,17 @@ You can check if you have enough by running this command:
 
 docker run --rm "debian:bullseye-slim" bash -c 'numfmt --to iec $(echo $(($(getconf _PHYS_PAGES) * $(getconf PAGE_SIZE))))'
 
+### Warning
+
+Some operating systems (Fedora, ArchLinux, RHEL, Rocky) have recently introduced Kernel changes that result in Airflow in Docker Compose consuming 100% memory when run inside the community Docker implementation maintained by OS teams.
+
+This is an issue with backwards-incompatible containerd configuration that some of Airflow dependencies have problems with and is tracked in a few issues:
+
+- Moby issue
+- Containeres issue
+
+There is no solution yet from the containerd team, but seems that installing Docker Desktop on Linus solves the problem as stated in This comment and allows to run Breeze with no problems. 
+
+
+
 https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#running-airflow-in-docker
